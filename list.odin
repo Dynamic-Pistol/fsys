@@ -40,8 +40,11 @@ list_files :: proc(options: ListFilesOptions) -> os.Error {
 		}
 
 		if options.show_long {
+
+			year, month, day := time.date(file.modification_time)
+
 			fmt.printfln(
-				"%v | %v |  %v-%v-%v | %v",
+				"%v | %v |   %d-%02d-%02d  | %v",
 				strings.centre_justify(
 					get_file_permissions_line(file.mode),
 					11,
@@ -54,7 +57,9 @@ list_files :: proc(options: ListFilesOptions) -> os.Error {
 					" ",
 					context.temp_allocator,
 				),
-				time.date(file.modification_time),
+				year,
+				int(month),
+				day,
 				file.name,
 			)
 		} else do fmt.printfln("%#v", file.name)
