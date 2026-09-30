@@ -25,7 +25,6 @@ main :: proc() {
 	free_all(context.temp_allocator)
 }
 
-
 get_file_size_rounded :: proc(size: i64, unit: rune = 'b') -> string {
 
 	if size < 1000 do return fmt.tprintf("{0}{1}", size, unit)
